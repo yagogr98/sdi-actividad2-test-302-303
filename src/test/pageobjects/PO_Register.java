@@ -11,11 +11,11 @@ public class PO_Register {
 		emaile.click();
 		emaile.clear();
 		emaile.sendKeys(email);				
-		WebElement  namee= driver.findElement(By.name("name"));
+		WebElement  namee= driver.findElement(By.name("nombre"));
 		namee.click();
 		namee.clear();
 		namee.sendKeys(name);
-		WebElement  lastnamee= driver.findElement(By.name("lastName"));
+		WebElement  lastnamee= driver.findElement(By.name("apellidos"));
 		lastnamee.click();
 		lastnamee.clear();
 		lastnamee.sendKeys(lastName);
@@ -23,7 +23,7 @@ public class PO_Register {
 		passe.click();
 		passe.clear();
 		passe.sendKeys(password);
-		WebElement  passec= driver.findElement(By.name("passwordConfirm"));
+		WebElement  passec= driver.findElement(By.name("password2"));
 		passec.click();
 		passec.clear();
 		passec.sendKeys(passwordConfirm);

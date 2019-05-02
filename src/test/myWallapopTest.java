@@ -21,6 +21,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import test.pageobjects.PO_AddOffer;
 import test.pageobjects.PO_HomeView;
 import test.pageobjects.PO_LoginView;
+import test.pageobjects.PO_NavView;
 import test.pageobjects.PO_PrivateView;
 import test.pageobjects.PO_Register;
 import test.pageobjects.PO_View;
@@ -31,17 +32,17 @@ import test.util.SeleniumUtils;;
 public class myWallapopTest {
 	// En Windows (Debe ser la versioÌ�n 65.0.1 y desactivar las actualizacioens
 	// automaÌ�ticas)):
-	static String PathFirefox64 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver022 = "C:\\path\\geckodriver024win64.exe";
+	//static String PathFirefox64 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+	//static String Geckdriver022 = "C:\\path\\geckodriver024win64.exe";
 	// En MACOSX (Debe ser la versioÌ�n 65.0.1 y desactivar las actualizacioens
 	// automaÌ�ticas):
-	//	static String PathFirefox65 = "/Applications/Firefox.app/Contents/MacOS/firefox-bin";
-	//	static String Geckdriver024 = "/Users/yagogarciarodriguez/Downloads/a/geckodriver024mac";
+		static String PathFirefox65 = "/Applications/Firefox.app/Contents/MacOS/firefox-bin";
+		static String Geckdriver024 = "/Users/yagogarciarodriguez/Downloads/a/geckodriver024mac";
 	// ComuÌ�n a Windows y a MACOSX
-	static WebDriver driver = getDriver(PathFirefox64, Geckdriver022);
-	static String URLlocal = "http://localhost:8090";
+	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
+	static String URLlocal = "http://localhost:8081";
 	static String URLremota = "http://ec2-34-224-173-6.compute-1.amazonaws.com:8080";
-	static String URL = URLremota; // Se va a probar con la URL remota, sino URL=URLlocal
+	static String URL = URLlocal; // Se va a probar con la URL remota, sino URL=URLlocal
 
 	public static WebDriver getDriver(String PathFirefox, String Geckdriver) {
 
@@ -53,17 +54,17 @@ public class myWallapopTest {
 		return driver;
 	}
 	
-//	// Antes de cada prueba se navega al URL home de la aplicacioÌ�nn
-//	@Before
-//	public void setUp() {
-//		driver.navigate().to(URL);
-//	}
+	// Antes de cada prueba se navega al URL home de la aplicacioÌ�nn
+	@Before
+	public void setUp() {
+		driver.navigate().to(URL);
+	}
 //
-//	// DespueÌ�s de cada prueba se borran las cookies del navegador
-//	@After
-//	public void tearDown() {
-//		driver.manage().deleteAllCookies();
-//	}
+	// DespueÌ�s de cada prueba se borran las cookies del navegador
+	@After
+	public void tearDown() {
+		driver.manage().deleteAllCookies();
+	}
 
 	//TODO Fijar la bbdd
 	// Antes de la primera prueba
@@ -78,7 +79,7 @@ public class myWallapopTest {
 	@Test
 	public void PR01() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
 		// Rellenamos el formulario
 		PO_Register.fillForm(driver, "", "12345", "12345", "12345", "12345");
 		// Miramos que seguimos en la misma pagina
@@ -89,7 +90,7 @@ public class myWallapopTest {
 	// invÃ¡lida).
 	@Test
 	public void PR02() {// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
 		// Rellenamos el formulario
 		PO_Register.fillForm(driver, "123@gmail.com", "12345", "12345", "12345", "54321");
 		// Miramos que seguimos en la misma pagina
@@ -99,9 +100,9 @@ public class myWallapopTest {
 	// [Prueba3] Registro de Usuario con datos invalidos (email existente).
 	@Test
 	public void PR03() {
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_Register.fillForm(driver, "pruebadeemail@prueba.com", "12345", "12345", "12345", "12345");
+		PO_Register.fillForm(driver, "prueba@prueba.com", "12345", "12345", "12345", "12345");
 		// Miramos que seguimos en la misma pagina
 		PO_View.checkElement(driver, "text", "Email");
 	}
@@ -111,7 +112,7 @@ public class myWallapopTest {
 //	@Test
 //	public void PR05() {
 //		// Vamos al formulario de logueo.
-//		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 //		// Rellenamos el formulario
 //		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 //		// COmprobamos que entramos en la pagina de inicio
@@ -123,11 +124,11 @@ public class myWallapopTest {
 	@Test
 	public void PR04() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_NavView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "pruebadeemail@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// COmprobamos que entramos en la pagina de inicio
-		PO_View.checkElement(driver, "text", "pruebadeemail@prueba.com");
+		PO_View.checkElement(driver, "text", "prueba@prueba.com");
 	}
 	
 	// [Prueba5] Inicio de sesiÃ³n con datos vÃ¡lidos (usuario estÃ¡ndar, email
@@ -136,9 +137,9 @@ public class myWallapopTest {
 	@Test
 	public void PR05() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "pruebadeemail@prueba.com", "");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "");
 		// COmprobamos que estamos en la pagina de login
 		PO_View.checkElement(driver, "text", "Email");
 	}
@@ -148,7 +149,7 @@ public class myWallapopTest {
 	@Test
 	public void PR06() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
 		PO_LoginView.fillForm(driver, "", "");
 		// COmprobamos que estamos en la pagina de login
@@ -162,7 +163,7 @@ public class myWallapopTest {
 	@Test
 	public void PR07() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
 		PO_LoginView.fillForm(driver, "emailinventado@l.com", "123456");
 		// COmprobamos que estamos en la pagina de login
@@ -174,13 +175,13 @@ public class myWallapopTest {
 	// redirige a la pÃ¡gina de inicio
 	// de sesiÃ³n (Login).
 	@Test
-	public void PR8() {
+	public void PR08() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "pruebadeemail@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Ahora nos desconectamos
-		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 		// COmprobamos que entramos en la pagina de login
 		PO_View.checkElement(driver, "text", "Email");
 
@@ -189,17 +190,17 @@ public class myWallapopTest {
 	// no estÃ¡ autenticado.
 
 	@Test
-	public void PR9() {
+	public void PR09() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Ahora nos desconectamos
-		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 		// COmprobamos que entramos en la pagina de login
 		PO_View.checkElement(driver, "text", "Email");
 
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Logout", PO_View.getTimeout());
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Desconectarse", PO_View.getTimeout());
 	}
 
 	// [Prueba10] Mostrar el listado de usuarios y comprobar que se muestran todos
@@ -208,23 +209,15 @@ public class myWallapopTest {
 	@Test
 	public void PR10() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'user/list')]");
-		elementos.get(0).click();
+		PO_LoginView.fillForm(driver, "admin@admin.com", "admin");
 		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
 
-		assertEquals(8, elementos1.size());
+		assertEquals(4, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -234,16 +227,11 @@ public class myWallapopTest {
 	@Test
 	public void PR11() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'user/list')]");
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
 				"//td[contains(text(), 'Pedro')]/following-sibling::*/input[contains(@type, 'checkbox')]");
@@ -253,7 +241,7 @@ public class myWallapopTest {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Pedro", PO_View.getTimeout());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 
 	}
@@ -264,7 +252,7 @@ public class myWallapopTest {
 	@Test
 	public void PR12() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 		// Click en usuarios
@@ -285,7 +273,7 @@ public class myWallapopTest {
 		System.out.print(elementos.size());
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "123@gmail.com", PO_View.getTimeout());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -295,7 +283,7 @@ public class myWallapopTest {
 	@Test
 	public void PR13() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 		// Click en usuarios
@@ -324,7 +312,7 @@ public class myWallapopTest {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "456@prueba.com", PO_View.getTimeout());
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "123444@prueba.com", PO_View.getTimeout());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -334,7 +322,7 @@ public class myWallapopTest {
 	@Test
 	public void PR14() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con usuario
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -360,7 +348,7 @@ public class myWallapopTest {
 		PO_View.checkElement(driver, "text", "descripciondeofeertanueva");
 
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -370,7 +358,7 @@ public class myWallapopTest {
 	@Test
 	public void PR15() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con usuario
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -385,7 +373,7 @@ public class myWallapopTest {
 		PO_View.checkElement(driver, "text", "Titulo incorrecto");
 
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -395,7 +383,7 @@ public class myWallapopTest {
 	@Test
 	public void PR16() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -411,7 +399,7 @@ public class myWallapopTest {
 
 		assertTrue(elementos1.size() == 5);
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -421,7 +409,7 @@ public class myWallapopTest {
 	@Test
 	public void PR17() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -444,7 +432,7 @@ public class myWallapopTest {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "OPEL 18", PO_View.getTimeout());
 
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -454,7 +442,7 @@ public class myWallapopTest {
 	@Test
 	public void PR18() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -477,7 +465,7 @@ public class myWallapopTest {
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "OPEL15", PO_View.getTimeout());
 
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -487,7 +475,7 @@ public class myWallapopTest {
 	@Test
 	public void PR19() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -504,7 +492,7 @@ public class myWallapopTest {
 
 		assertEquals(5, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -514,7 +502,7 @@ public class myWallapopTest {
 	@Test
 	public void PR20() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -538,7 +526,7 @@ public class myWallapopTest {
 		// El minimo de elementos es 1.
 		assertTrue(elementos1.size() == 1);
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 	
@@ -549,7 +537,7 @@ public class myWallapopTest {
 		@Test
 		public void PR21() {
 			// Vamos al formulario de logueo.
-			PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 			// Rellenamos el formulario con admin
 			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 			// Click en usuarios
@@ -573,7 +561,7 @@ public class myWallapopTest {
 			// El minimo de elementos es 1.
 			assertTrue(elementos1.size() == 1);
 			// Salimos de sesion
-			PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 		}
 
@@ -585,7 +573,7 @@ public class myWallapopTest {
 	@Test
 	public void PR22() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -622,7 +610,7 @@ public class myWallapopTest {
 		// El minimo de elementos es 1.
 		assertTrue(elementos1.size() == 1);
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -634,7 +622,7 @@ public class myWallapopTest {
 	@Test
 	public void PR23() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -670,7 +658,7 @@ public class myWallapopTest {
 		PO_View.checkElement(driver, "text", "0.0");
 		// El minimo de elementos es 1.
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -683,7 +671,7 @@ public class myWallapopTest {
 	public void PR24() {
 
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -713,7 +701,7 @@ public class myWallapopTest {
 		// Comprobamos mensaje
 		PO_View.checkElement(driver, "text", "Error");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -724,7 +712,7 @@ public class myWallapopTest {
 	public void PR25() {
 
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -738,7 +726,7 @@ public class myWallapopTest {
 		PO_View.checkElement(driver, "text", "OPEL21");
 		PO_View.checkElement(driver, "text", "OPEL20");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -750,7 +738,7 @@ public class myWallapopTest {
 //	@Test
 //	public void PR27() {
 //		//Login
-//		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 //		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 //		PO_View.checkElement(driver, "text", "Bienvenido");
 //
@@ -808,7 +796,7 @@ public class myWallapopTest {
 //		
 //		driver.navigate().to(URL + "/home");
 //		
-//		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 //
 //		// Rellenamos el formulario con admin
 //		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
@@ -831,7 +819,7 @@ public class myWallapopTest {
 //
 //		PO_View.checkElement(driver, "text", "Apellidos");
 //		// Salimos de sesion
-//		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 //	}
 
 
@@ -843,7 +831,7 @@ public class myWallapopTest {
 	@Test
 	public void PR26() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con usuario
 		PO_LoginView.fillForm(driver, "123@prueba.com", "123456");
 		// Click en usuarios
@@ -868,7 +856,7 @@ public class myWallapopTest {
 		PO_View.checkElement(driver, "text", "180.0");
 
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -880,7 +868,7 @@ public class myWallapopTest {
 	// del ofertante (-20).
 	@Test
 	public void PR27() {
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -890,7 +878,7 @@ public class myWallapopTest {
 
 		PO_View.checkElement(driver, "text", "titulodeofertadepruebaparadestacada");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 
 	}
@@ -901,7 +889,7 @@ public class myWallapopTest {
 	// saldo no suficiente.
 	@Test
 	public void PR28() {
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -921,7 +909,7 @@ public class myWallapopTest {
 
 		PO_View.checkElement(driver, "text", "No se ha realizado la compra");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -943,7 +931,7 @@ public class myWallapopTest {
 		@Test
 		public void PR33() {
 			// Vamos al formulario de logueo.
-			PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 			// Rellenamos el formulario con admin
 			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 			// Click en usuarios
@@ -976,7 +964,7 @@ public class myWallapopTest {
 			// Comprobamos mensaje
 			PO_View.checkElement(driver, "text", "Me interesa");
 			// Salimos de sesion
-			PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 		}
 
@@ -986,7 +974,7 @@ public class myWallapopTest {
 		@Test
 		public void PR34() {
 			// Vamos al formulario de logueo.
-			PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 			// Rellenamos el formulario con admin
 			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 			// Click en usuarios
@@ -1005,7 +993,7 @@ public class myWallapopTest {
 			// Comprobamos mensaje
 			PO_View.checkElement(driver, "text", "adjudicado");
 			// Salimos de sesion
-			PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 
 		}
@@ -1037,14 +1025,14 @@ public class myWallapopTest {
 //	public void PR30() {
 //
 //		// Vamos al formulario de logueo.
-//		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 //		// Rellenamos el formulario con admin
 //		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 //		// Click en usuarios
 //		driver.navigate().to(URL + "/user/list");
 //		PO_View.checkElement(driver, "text", "403");
 //		// Salimos de sesion
-//		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 //
 //
 //	}
@@ -1057,7 +1045,7 @@ public class myWallapopTest {
 	@Test
 	public void PR35() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -1070,7 +1058,7 @@ public class myWallapopTest {
 		//Solo hay un chat
 		assertEquals(1, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -1080,7 +1068,7 @@ public class myWallapopTest {
 	@Test
 	public void PR36() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -1093,7 +1081,7 @@ public class myWallapopTest {
 		//Solo hay un chat
 		assertEquals(1, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -1103,7 +1091,7 @@ public class myWallapopTest {
 	@Test
 	public void PR37() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -1136,10 +1124,10 @@ public class myWallapopTest {
 		// Comprobamos mensaje
 		PO_View.checkElement(driver, "text", "Me interesa");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
@@ -1152,7 +1140,7 @@ public class myWallapopTest {
 		//Solo hay un chat
 		assertEquals(1, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 	
