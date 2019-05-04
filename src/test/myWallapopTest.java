@@ -70,7 +70,57 @@ public class myWallapopTest {
 	// Antes de la primera prueba
 	@BeforeClass
 	static public void begin() {
-		// PO_NavView.changeIdiom(driver, "btnSpanish");
+		//driver.navigate().to("http://localhost:8081/test");
+		driver.navigate().to(URL);
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "1@prueba.com", "1", "1", "1", "1");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "12@prueba.com", "12", "12", "12", "12");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "123@prueba.com", "123", "123", "123", "123");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "1234@prueba.com", "1234", "1234", "1234", "1234");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "12345@prueba.com", "12345", "12345", "12345", "12345");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "123456@prueba.com", "123456", "123456", "123456", "123456");
+		// Miramos que seguimos en la misma pagina
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "prueba@prueba.com", "prueba", "prueba", "prueba", "prueba");
+		// Miramos que seguimos en la misma pagina
+		
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "admin@admin.com", "admin", "admin", "admin", "admin");
+		// Miramos que seguimos en la misma pagina
 	}
 
 
@@ -92,7 +142,7 @@ public class myWallapopTest {
 	public void PR02() {// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_Register.fillForm(driver, "123@gmail.com", "12345", "12345", "12345", "54321");
+		PO_Register.fillForm(driver, "123@prueba.com", "12345", "12345", "12345", "54321");
 		// Miramos que seguimos en la misma pagina
 		PO_View.checkElement(driver, "text", "Email");
 	}
@@ -102,13 +152,13 @@ public class myWallapopTest {
 	public void PR03() {
 		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
 		// Rellenamos el formulario
-		PO_Register.fillForm(driver, "prueba@prueba.com", "12345", "12345", "12345", "12345");
+		PO_Register.fillForm(driver, "123@prueba.com", "12345", "12345", "12345", "12345");
 		// Miramos que seguimos en la misma pagina
 		PO_View.checkElement(driver, "text", "Email");
 	}
 	
 
-//	// [Prueba5] Inicio de sesiÃ³n con datos vÃ¡lidos (administrador).
+	// [Prueba5] Inicio de sesiÃ³n con datos vÃ¡lidos (administrador).
 //	@Test
 //	public void PR05() {
 //		// Vamos al formulario de logueo.
@@ -215,9 +265,9 @@ public class myWallapopTest {
 		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
 
-		assertEquals(4, elementos1.size());
+		assertEquals(8, elementos1.size());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		driver.navigate().to("http://localhost:8081/desconectarse");
 
 	}
 
@@ -229,19 +279,18 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_LoginView.fillForm(driver, "admin@admin.com", "admin");
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
-		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), 'Pedro')]/following-sibling::*/input[contains(@type, 'checkbox')]");
+				"//td[contains(text(), '1')]/following-sibling::*/input[contains(@id, 'chkbox')]");
 		elementos.get(0).click();
-		By boton = By.className("delete");
+		By boton = By.id("delete");
 		driver.findElement(boton).click();
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Pedro", PO_View.getTimeout());
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "1", PO_View.getTimeout());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		driver.navigate().to("http://localhost:8081/desconectarse");
 
 
 	}
@@ -251,29 +300,30 @@ public class myWallapopTest {
 	// y dicho usuario desaparece.
 	@Test
 	public void PR12() {
+//		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+//		// Rellenamos el formulario
+//		PO_Register.fillForm(driver, "prueba@prueba.com", "12345", "12345", "12345", "12345");
+//		// Miramos que seguimos en la misma pagina
+//		PO_View.checkElement(driver, "text", "prueba@prueba.com");
+//		driver.navigate().to("http://localhost:8081/desconectarse");
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_LoginView.fillForm(driver, "admin@admin.com", "admin");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'user/list')]");
-		elementos.get(0).click();
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
 		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), '123@gmail.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
+				"//td[contains(text(), '123456')]/following-sibling::*/input[contains(@type, 'checkbox')]");
 		elementos.get(0).click();
-		By boton = By.className("delete");
+		By boton = By.id("delete");
 		driver.findElement(boton).click();
 
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
 		System.out.print(elementos.size());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "123@gmail.com", PO_View.getTimeout());
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "ultimo@prueba.com", PO_View.getTimeout());
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		driver.navigate().to("http://localhost:8081/desconectarse");
 
 	}
 
@@ -282,37 +332,46 @@ public class myWallapopTest {
 	// usuarios desaparecen.
 	@Test
 	public void PR13() {
-		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "123@prueba.com", "123", "123", "123", "123");
+		// Miramos que seguimos en la misma pagina
+		driver.navigate().to("http://localhost:8081/desconectarse");
+		
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "1234@prueba.com", "1234", "1234", "1234", "1234");
+		// Miramos que seguimos en la misma pagina
+		driver.navigate().to("http://localhost:8081/desconectarse");
+		
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		
+		PO_HomeView.clickOption(driver, "/registrarse", "class", "signup");
+		// Rellenamos el formulario
+		PO_Register.fillForm(driver, "12345@prueba.com", "12345", "12345", "12345", "12345");
+		// Miramos que seguimos en la misma pagina
+		driver.navigate().to("http://localhost:8081/desconectarse");
+		PO_LoginView.fillForm(driver, "admin@admin.com", "admin");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'user/list')]");
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), '123@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), '789@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
+				"//td[contains(text(), '1234@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), '456@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
+				"//td[contains(text(), '12345@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
 		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), '123444@prueba.com')]/following-sibling::*/input[contains(@type, 'checkbox')]");
-		elementos.get(0).click();
-		By boton = By.className("delete");
+		By boton = By.id("delete");
 		driver.findElement(boton).click();
-
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-		System.out.print(elementos.size());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "789@prueba.com", PO_View.getTimeout());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "456@prueba.com", PO_View.getTimeout());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "123444@prueba.com", PO_View.getTimeout());
+		driver.navigate().to("http://localhost:8081/admin");
+		SeleniumUtils.textoNoPresentePagina(driver, "123@prueba.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "1234@prueba.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "12345@prueba.com");
 		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		driver.navigate().to("http://localhost:8081/desconectarse");
 
 	}
 
@@ -324,28 +383,15 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con usuario
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "titulodeofertadeprueba", "descripciondeofeertanueva", "1");
 
-		// Pinchamos en la opcioÌ�n de aÃ±adir oferta y aÃ±adimos.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/add')]");
-		elementos.get(0).click();
-		PO_AddOffer.fillForm(driver, "titulodeofertadeprueba", "descripciondeofeertanueva", "1", "http://google.es");
+		driver.navigate().to("http://localhost:8081/publicaciones");
 
-		// Comprobamos que sale
-		elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de aÃ±adir oferta y aÃ±adimos.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
-		elementos.get(0).click();
-		// Volvemos a la Ãºltima pagina
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
-		elementos.get(3).click();
-		PO_View.checkElement(driver, "text", "descripciondeofeertanueva");
+		SeleniumUtils.textoPresentePagina(driver, "titulodeofertadeprueba");
 
 		// Salimos de sesion
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
@@ -358,22 +404,17 @@ public class myWallapopTest {
 	@Test
 	public void PR15() {
 		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con usuario
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
+				PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+				// Rellenamos el formulario con usuario
+				PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
+				driver.navigate().to("http://localhost:8081/productos/agregar");
+				
+				PO_AddOffer.fillForm(driver, "", "descripciondeofeertanueva", "1");
+				SeleniumUtils.textoPresentePagina(driver, "Agregar producto");
 
-		// Pinchamos en la opcioÌ�n de aÃ±adir oferta y aÃ±adimos.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/add')]");
-		elementos.get(0).click();
-		PO_AddOffer.fillForm(driver, "", "descripciondeofeertanueva", "1", "http://google.es");
-		PO_View.checkElement(driver, "text", "Titulo incorrecto");
-
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+				// Salimos de sesion
+				driver.navigate().to("http://localhost:8081/desconectarse");
 
 	}
 
@@ -382,22 +423,15 @@ public class myWallapopTest {
 	// existen para este usuario.
 	@Test
 	public void PR16() {
-		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
-		elementos.get(0).click();
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+		// Rellenamos el formulario con usuario
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
+		driver.navigate().to("http://localhost:8081/publicaciones");
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
+		assertEquals(1, elementos.size());
+		
 
-		assertTrue(elementos1.size() == 5);
 		// Salimos de sesion
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
@@ -411,28 +445,28 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "titulodeofertadeprueba2222", "descripciondeofeertanueva", "1");
+		
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "titulodeofertadeprueba22222", "descripciondeofeertanueva", "1");
 
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
+		driver.navigate().to("http://localhost:8081/publicaciones");
 
-		// Pinchamos en la opcioÌ�n de lista de ofertas.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
+
+		// Pinchamos en la opcioÌ�n de lista de usuarios.
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@name,'deletebutton')]");
 		elementos.get(0).click();
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+		
+		driver.navigate().to("http://localhost:8081/publicaciones");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
-
-		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), 'OPEL18')]/following-sibling::*/a[contains(@href, 'offer/delete')]");
-		elementos.get(0).click();
-
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-		System.out.print(elementos.size());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "OPEL 18", PO_View.getTimeout());
-
-		// Salimos de sesion
+		assertEquals(2, elementos.size());
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		
 
 	}
 
@@ -444,27 +478,22 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "titulodeofertadeprueba", "descripciondeofeertanueva", "1");
 
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
+		driver.navigate().to("http://localhost:8081/publicaciones");
 
-		// Pinchamos en la opcioÌ�n de lista de ofertas.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
-		elementos.get(0).click();
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+
+		// Pinchamos en la opcioÌ�n de lista de usuarios.
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//a[contains(@name,'deletebutton')]");
+		elementos.get(2).click();
+		
+		driver.navigate().to("http://localhost:8081/publicaciones");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
-
-		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), 'OPEL15')]/following-sibling::*/a[contains(@href, 'offer/delete')]");
-		elementos.get(0).click();
-
-		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr", PO_View.getTimeout());
-		System.out.print(elementos.size());
-		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "OPEL15", PO_View.getTimeout());
-
-		// Salimos de sesion
+		assertEquals(2, elementos.size());
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
@@ -476,21 +505,14 @@ public class myWallapopTest {
 	public void PR19() {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+		// Rellenamos el formulario con usuario
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Click en usuarios
 
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
+		driver.navigate().to("http://localhost:8081/tienda");
+		SeleniumUtils.textoPresentePagina(driver, "titulodeofertadeprueba2222");
+		SeleniumUtils.textoPresentePagina(driver, "titulodeofertadeprueba22222");
 
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
-
-		assertEquals(5, elementos1.size());
 		// Salimos de sesion
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
@@ -504,28 +526,18 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-		WebElement tituloe = driver.findElement(By.name("searchText"));
+		driver.navigate().to("http://localhost:8081/tienda");
+		WebElement tituloe = driver.findElement(By.id("search"));
 		tituloe.click();
 		tituloe.clear();
-		tituloe.sendKeys("Ferrari 458");
+		tituloe.sendKeys("asldkmasldkmalskdm");
 		// Pulsamos boton buscar
-		By boton = By.className("busqueda");
+		By boton = By.className("btn");
 		driver.findElement(boton).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-		// El minimo de elementos es 1.
-		assertTrue(elementos1.size() == 1);
-		// Salimos de sesion
+		SeleniumUtils.textoNoPresentePagina(driver, "titulodeofertadeprueba2222");
+		SeleniumUtils.textoNoPresentePagina(driver, "titulodeofertadeprueba22222");
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
@@ -539,28 +551,17 @@ public class myWallapopTest {
 			// Vamos al formulario de logueo.
 			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 			// Rellenamos el formulario con admin
-			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+			PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 			// Click en usuarios
-
-			List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-			elementos.get(0).click();
-
-			// Pinchamos en la opcioÌ�n de lista de usuarios.
-			elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-			elementos.get(0).click();
-			WebElement tituloe = driver.findElement(By.name("searchText"));
+			driver.navigate().to("http://localhost:8081/tienda");
+			WebElement tituloe = driver.findElement(By.id("search"));
 			tituloe.click();
 			tituloe.clear();
-			tituloe.sendKeys("Ferrari 458");
+			tituloe.sendKeys("titulodeofertadeprueba2222");
 			// Pulsamos boton buscar
-			By boton = By.className("busqueda");
+			By boton = By.className("btn");
 			driver.findElement(boton).click();
-
-			List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-			// El minimo de elementos es 1.
-			assertTrue(elementos1.size() == 1);
-			// Salimos de sesion
+			SeleniumUtils.textoPresentePagina(driver, "titulodeofertadeprueba2222");
 			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 		}
@@ -575,42 +576,23 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-		WebElement tituloe = driver.findElement(By.name("searchText"));
+		driver.navigate().to("http://localhost:8081/tienda");
+		WebElement tituloe = driver.findElement(By.id("search"));
 		tituloe.click();
 		tituloe.clear();
-		tituloe.sendKeys("OPEL21");
+		tituloe.sendKeys("titulodeofertadeprueba2222");
 		// Pulsamos boton buscar
-		By boton = By.className("busqueda");
+		By boton = By.className("btn");
 		driver.findElement(boton).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-		boton = By.className("botoncomprar");
-		driver.findElement(boton).click();
-
-		// finalizamos compra
-		boton = By.className("end");
-		driver.findElement(boton).click();
-
-		// volver a home
-
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/home')]");
+		SeleniumUtils.textoPresentePagina(driver, "titulodeofertadeprueba2222");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[2]/div[1]/div/a/div[1]");
 		elementos.get(0).click();
-
-		PO_View.checkElement(driver, "text", "60.0");
-		// El minimo de elementos es 1.
-		assertTrue(elementos1.size() == 1);
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[1]/div/div[2]/a");
+		elementos.get(0).click();
+		SeleniumUtils.textoPresentePagina(driver, "Dinero: 99");
+		
 
 	}
 
@@ -626,39 +608,30 @@ public class myWallapopTest {
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-		WebElement tituloe = driver.findElement(By.name("searchText"));
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "ofertacara", "oferta", "100");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+		// Rellenamos el formulario con admin
+		PO_LoginView.fillForm(driver, "12@prueba.com", "12");
+		
+		driver.navigate().to("http://localhost:8081/tienda");
+		WebElement tituloe = driver.findElement(By.id("search"));
 		tituloe.click();
 		tituloe.clear();
-		tituloe.sendKeys("OPEL20");
+		tituloe.sendKeys("ofertacara");
 		// Pulsamos boton buscar
-		By boton = By.className("busqueda");
+		By boton = By.className("btn");
 		driver.findElement(boton).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-		boton = By.className("botoncomprar");
-		driver.findElement(boton).click();
-
-		// finalizamos compra
-		boton = By.className("end");
-		driver.findElement(boton).click();
-
-		// volver a home
-
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/home')]");
+		SeleniumUtils.textoPresentePagina(driver, "cara");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[2]/div[1]/div/a/div[1]");
 		elementos.get(0).click();
-
-		PO_View.checkElement(driver, "text", "0.0");
-		// El minimo de elementos es 1.
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[1]/div/div[2]/a");
+		elementos.get(0).click();
+		SeleniumUtils.textoPresentePagina(driver, "Dinero: 0");
 
 	}
 
@@ -669,39 +642,35 @@ public class myWallapopTest {
 	// saldo no suficiente.
 	@Test
 	public void PR24() {
-
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
 		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-		WebElement tituloe = driver.findElement(By.name("searchText"));
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
+		driver.navigate().to("http://localhost:8081/productos/agregar");
+		
+		PO_AddOffer.fillForm(driver, "ofertacara", "oferta", "100");
+		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+		// Rellenamos el formulario con admin
+		PO_LoginView.fillForm(driver, "12@prueba.com", "12");
+		
+		driver.navigate().to("http://localhost:8081/tienda");
+		WebElement tituloe = driver.findElement(By.id("search"));
 		tituloe.click();
 		tituloe.clear();
-		tituloe.sendKeys("OPEL22");
+		tituloe.sendKeys("ofertacara");
 		// Pulsamos boton buscar
-		By boton = By.className("busqueda");
+		By boton = By.className("btn");
 		driver.findElement(boton).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-		boton = By.className("botoncomprar");
-		driver.findElement(boton).click();
-
-		// finalizamos compra
-		boton = By.className("end");
-		driver.findElement(boton).click();
-		// Comprobamos mensaje
-		PO_View.checkElement(driver, "text", "Error");
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		SeleniumUtils.textoPresentePagina(driver, "cara");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[2]/div[1]/div/a/div[1]");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "//html/body/div[1]/div[1]/div/div[2]/a");
+		elementos.get(0).click();
+		SeleniumUtils.textoPresentePagina(driver, "No tienes saldo suficiente");
 
 	}
 
@@ -714,17 +683,11 @@ public class myWallapopTest {
 		// Vamos al formulario de logueo.
 		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
 		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+		PO_LoginView.fillForm(driver, "prueba@prueba.com", "prueba");
 		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'purchase/list')]");
-		elementos.get(0).click();
-		PO_View.checkElement(driver, "text", "OPEL21");
-		PO_View.checkElement(driver, "text", "OPEL20");
+		
+		driver.navigate().to("http://localhost:8081/compras");
+		PO_View.checkElement(driver, "text", "titulodeofertadeprueba2222");
 		// Salimos de sesion
 		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
