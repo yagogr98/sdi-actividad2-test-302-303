@@ -786,95 +786,95 @@ public class myWallapopTest {
 //	}
 
 
-	// [Prueba26] Al crear una oferta marcar dicha oferta como destacada y a
-	// continuaciÃ³n comprobar: i) que
-	// aparece en el listado de ofertas destacadas para los usuarios y que el saldo
-	// del usuario se actualiza
-	// adecuadamente en la vista del ofertante (-20).
-	@Test
-	public void PR26() {
-		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con usuario
-		PO_LoginView.fillForm(driver, "123@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de aÃ±adir oferta y aÃ±adimos.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/add')]");
-		elementos.get(0).click();
-		PO_AddOffer.fillFormSpecial(driver, "titulodeofertadepruebaparadestacada", "descripciondeofeertanussseva", "1000", "http://pruebaurl.com");
-		elementos = PO_View.checkElement(driver, "free",
-				"//input[contains(@type, 'checkbox')]");
-		elementos.get(0).click();
-		By boton = By.className("btn");
-		driver.findElement(boton).click();
-
-		// Comprobamos que sale
-
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/home')]");
-		elementos.get(0).click();
-		PO_View.checkElement(driver, "text", "180.0");
-
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
-
-	}
-
-	// [Prueba27] Sobre el listado de ofertas de un usuario con menos de 20 euros de
-	// saldo, pinchar en el
-	// enlace Destacada y a continuaciÃ³n comprobar: i) que aparece en el listado de
-	// ofertas destacadas para los
-	// usuarios y que el saldo del usuario se actualiza adecuadamente en la vista
-	// del ofertante (-20).
-	@Test
-	public void PR27() {
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
-
-		PO_View.checkElement(driver, "text", "titulodeofertadepruebaparadestacada");
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
-
-
-	}
-
-	// [Prueba28] Sobre el listado de ofertas de un usuario con menos de 20 euros de
-	// saldo, pinchar en el
-	// enlace Destacada y a continuaciÃ³n comprobar que se muestra el mensaje de
-	// saldo no suficiente.
-	@Test
-	public void PR28() {
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de ofertas.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
-		elementos.get(0).click();
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
-
-		elementos = PO_View.checkElement(driver, "free",
-				"//td[contains(text(), 'OPEL19')]/following-sibling::*/a[contains(@href, 'offer/special')]");
-		elementos.get(0).click();
-
-		PO_View.checkElement(driver, "text", "No se ha realizado la compra");
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
-
-	}
+//	// [Prueba26] Al crear una oferta marcar dicha oferta como destacada y a
+//	// continuaciÃ³n comprobar: i) que
+//	// aparece en el listado de ofertas destacadas para los usuarios y que el saldo
+//	// del usuario se actualiza
+//	// adecuadamente en la vista del ofertante (-20).
+//	@Test
+//	public void PR26() {
+//		// Vamos al formulario de logueo.
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+//		// Rellenamos el formulario con usuario
+//		PO_LoginView.fillForm(driver, "123@prueba.com", "123456");
+//		// Click en usuarios
+//
+//		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
+//		elementos.get(0).click();
+//
+//		// Pinchamos en la opcioÌ�n de aÃ±adir oferta y aÃ±adimos.
+//		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/add')]");
+//		elementos.get(0).click();
+//		PO_AddOffer.fillFormSpecial(driver, "titulodeofertadepruebaparadestacada", "descripciondeofeertanussseva", "1000", "http://pruebaurl.com");
+//		elementos = PO_View.checkElement(driver, "free",
+//				"//input[contains(@type, 'checkbox')]");
+//		elementos.get(0).click();
+//		By boton = By.className("btn");
+//		driver.findElement(boton).click();
+//
+//		// Comprobamos que sale
+//
+//		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/home')]");
+//		elementos.get(0).click();
+//		PO_View.checkElement(driver, "text", "180.0");
+//
+//		// Salimos de sesion
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+//
+//	}
+//
+//	// [Prueba27] Sobre el listado de ofertas de un usuario con menos de 20 euros de
+//	// saldo, pinchar en el
+//	// enlace Destacada y a continuaciÃ³n comprobar: i) que aparece en el listado de
+//	// ofertas destacadas para los
+//	// usuarios y que el saldo del usuario se actualiza adecuadamente en la vista
+//	// del ofertante (-20).
+//	@Test
+//	public void PR27() {
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+//		// Rellenamos el formulario con admin
+//		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+//		// Click en usuarios
+//
+//		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
+//		elementos.get(0).click();
+//
+//		PO_View.checkElement(driver, "text", "titulodeofertadepruebaparadestacada");
+//		// Salimos de sesion
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+//
+//
+//	}
+//
+//	// [Prueba28] Sobre el listado de ofertas de un usuario con menos de 20 euros de
+//	// saldo, pinchar en el
+//	// enlace Destacada y a continuaciÃ³n comprobar que se muestra el mensaje de
+//	// saldo no suficiente.
+//	@Test
+//	public void PR28() {
+//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+//		// Rellenamos el formulario con admin
+//		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
+//		// Click en usuarios
+//
+//		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'offers-menu')]/a");
+//		elementos.get(0).click();
+//
+//		// Pinchamos en la opcioÌ�n de lista de ofertas.
+//		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/mylist')]");
+//		elementos.get(0).click();
+//		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+//				PO_View.getTimeout());
+//
+//		elementos = PO_View.checkElement(driver, "free",
+//				"//td[contains(text(), 'OPEL19')]/following-sibling::*/a[contains(@href, 'offer/special')]");
+//		elementos.get(0).click();
+//
+//		PO_View.checkElement(driver, "text", "No se ha realizado la compra");
+//		// Salimos de sesion
+//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+//
+//	}
 
 	//TODO
 	//PRUEBAS Parte 2B – Cliente REST – Aplicación web con JQuery
@@ -886,77 +886,110 @@ public class myWallapopTest {
 //	menos las del usuario identificado.
 	
 	
-	// [Prueba33] Sobre una bÃºsqueda determinada de ofertas (a elecciÃ³n de
-		// desarrollador), enviar un mensaje
-		// a una oferta concreta. Se abrirÃ­a dicha conversaciÃ³n por primera vez.
-		// Comprobar que el mensaje aparece
-		// en el listado de mensajes.
+	// [Prueba29] Inicio de sesión con datos válidos.
 		@Test
-		public void PR33() {
-			// Vamos al formulario de logueo.
-			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-			// Rellenamos el formulario con admin
-			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-			// Click en usuarios
-
-			List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
+		public void PR29() {
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
 			elementos.get(0).click();
-
-			// Pinchamos en la opcioÌ�n de lista de usuarios.
-			elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("12@prueba.com");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
 			elementos.get(0).click();
-			WebElement tituloe = driver.findElement(By.name("searchText"));
-			tituloe.click();
-			tituloe.clear();
-			tituloe.sendKeys("OPEL24");
-			// Pulsamos boton buscar
-			By boton = By.className("busqueda");
-			driver.findElement(boton).click();
-
-			List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-			boton = By.className("details");
-			driver.findElement(boton).click();
-
-			tituloe = driver.findElement(By.name("content"));
-			tituloe.click();
-			tituloe.clear();
-			tituloe.sendKeys("Me interesa");
-			boton = By.className("enviachat");
-			driver.findElement(boton).click();
-			// Comprobamos mensaje
-			PO_View.checkElement(driver, "text", "Me interesa");
-			// Salimos de sesion
-			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("12");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "titulodeofertadeprueba2222", PO_View.getTimeout());
 
 		}
 
-		// [Prueba34] Sobre el listado de conversaciones enviar un mensaje a una
-		// conversaciÃ³n ya abierta.
-		// Comprobar que el mensaje aparece en la lista de mensajes.
+		// [Prueba30] Inicio de sesión con datos inválidos (email existente, pero contraseña incorrecta).
+		@Test
+		public void PR30() {
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("12@prueba.com");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("a");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "Usuario no encontrado", PO_View.getTimeout());
+
+
+		}
+		// [Prueba31] Inicio de sesión con datos válidos (campo email o contraseña vacíos).
+		@Test
+		public void PR31() {
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("a");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "Usuario no encontrado", PO_View.getTimeout());
+
+
+		}
+		
+		// [Prueba32] Mostrar el listado de ofertas disponibles y comprobar que se muestran todas las que existen,
+//		menos las del usuario identificado.
+		@Test
+		public void PR32() {
+			//Creamos nueva oferta y comprobamos que no sale
+			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
+			PO_LoginView.fillForm(driver, "12@prueba.com", "12");
+			driver.navigate().to("http://localhost:8081/productos/agregar");
+			PO_AddOffer.fillForm(driver, "ofertaquenosale", "ofertaquenosale", "100");
+			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+			// Vamos al formulario de logueo.
+			
+			// Rellenamos el formulario con admin
+			
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("12@prueba.com");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("12");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "ofertaquenosale", PO_View.getTimeout());
+
+
+		}
+		
+		// [Prueba33] Sobre una búsqueda determinada de ofertas (a elección de desarrollador), 
+		//enviar un mensaje a una oferta concreta. 
+		//Se abriría dicha conversación por primera vez. Comprobar que el mensaje aparece en el listado de mensajes.
+		@Test
+		public void PR33() {
+			//TODO
+
+
+		}
+		
+		// [Prueba34] Sobre el listado de conversaciones enviar un mensaje a una conversación ya abierta. 
+		//Comprobar que el mensaje aparece en el listado de mensajes.
 		@Test
 		public void PR34() {
-			// Vamos al formulario de logueo.
-			PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-			// Rellenamos el formulario con admin
-			PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-			// Click en usuarios
-
-			List<WebElement> elementos = PO_View.checkElement(driver, "class", "messages");
-			elementos.get(0).click();
-			// Pinchamos en un mensaje.
-			elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/chat/conversation/')]");
-			elementos.get(0).click();
-			WebElement tituloe = driver.findElement(By.name("content"));
-			tituloe.click();
-			tituloe.clear();
-			tituloe.sendKeys("adjudicado");
-			By boton = By.className("enviachat");
-			driver.findElement(boton).click();
-			// Comprobamos mensaje
-			PO_View.checkElement(driver, "text", "adjudicado");
-			// Salimos de sesion
-			PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+			//TODO
 
 
 		}
