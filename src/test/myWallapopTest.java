@@ -980,8 +980,33 @@ public class myWallapopTest {
 		//Se abriría dicha conversación por primera vez. Comprobar que el mensaje aparece en el listado de mensajes.
 		@Test
 		public void PR33() {
-			//TODO
-
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("prueba@prueba.com");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("prueba");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/table/tbody/tr[1]/td[5]/a");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"mensaje\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("mensajepruebararo");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-enviar\"]");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button");
+			elementos.get(0).click();
+			
+			
+			
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararo", PO_View.getTimeout());
+			
 
 		}
 		
@@ -989,50 +1014,36 @@ public class myWallapopTest {
 		//Comprobar que el mensaje aparece en el listado de mensajes.
 		@Test
 		public void PR34() {
-			//TODO
+			driver.navigate().to("http://localhost:8081/cliente.html");
+			
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("prueba@prueba.com");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("prueba");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/table/tbody/tr[1]/td[5]/a");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"mensaje\"]");
+			elementos.get(0).click();
+			elementos.get(0).clear();
+			elementos.get(0).sendKeys("mensajepruebararosegundo");
+			elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-enviar\"]");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button");
+			elementos.get(0).click();
+			
+			
+			
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararo", PO_View.getTimeout());
+			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararosegundo", PO_View.getTimeout());
 
 
 		}
-
-		
-
-//	// [Prueba28] Intentar acceder sin estar autenticado a la opciÃ³n de listado de
-//	// usuarios del administrador. Se
-//	// deberÃ¡ volver al formulario de login.
-//	@Test
-//	public void PR28() {
-//		driver.navigate().to(URL + "/user/list");
-//		PO_View.checkElement(driver, "text", "Email");
-//	}
-
-//	// [Prueba29] Intentar acceder sin estar autenticado a la opciÃ³n de listado de
-//	// ofertas propias de un usuario
-//	// estÃ¡ndar. Se deberÃ¡ volver al formulario de login.
-//	@Test
-//	public void PR29() {
-//		driver.navigate().to(URL + "/offer/mylist");
-//		PO_View.checkElement(driver, "text", "Email");
-//	}
-
-//	// [Prueba30] Estando autenticado como usuario estÃ¡ndar intentar acceder a la
-//	// opciÃ³n de listado de
-//	// usuarios del administrador. Se deberÃ¡ indicar un mensaje de acciÃ³n prohibida
-//
-//	public void PR30() {
-//
-//		// Vamos al formulario de logueo.
-//		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-//		// Rellenamos el formulario con admin
-//		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-//		// Click en usuarios
-//		driver.navigate().to(URL + "/user/list");
-//		PO_View.checkElement(driver, "text", "403");
-//		// Salimos de sesion
-//		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
-//
-//
-//	}
-
 	
 
 	// [Prueba35] Mostrar el listado de conversaciones ya abiertas. Comprobar que el
@@ -1040,21 +1051,27 @@ public class myWallapopTest {
 	// conversaciones que deben ser.
 	@Test
 	public void PR35() {
-		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "messages");
+		//TODO
+		driver.navigate().to("http://localhost:8081/cliente.html");
+		
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
 		elementos.get(0).click();
+		elementos.get(0).clear();
+		elementos.get(0).sendKeys("prueba@prueba.com");
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+		elementos.get(0).click();
+		elementos.get(0).clear();
+		elementos.get(0).sendKeys("prueba");
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+		elementos.get(0).click();
+		
+		//Click en boton Ver conversaciones
+		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button[2]");
+		elementos.get(0).click();
+		
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "ofertaquenosale", PO_View.getTimeout());
 
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
-		//Solo hay un chat
-		assertEquals(1, elementos1.size());
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
 
 	}
 
@@ -1063,21 +1080,7 @@ public class myWallapopTest {
 	// comprobar que el listado se actualiza correctamente.
 	@Test
 	public void PR36() {
-		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "messages");
-		elementos.get(0).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
-		//Solo hay un chat
-		assertEquals(1, elementos1.size());
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		//TODO
 
 	}
 
@@ -1086,57 +1089,7 @@ public class myWallapopTest {
 	// comprobar que el listado se actualiza correctamente.
 	@Test
 	public void PR37() {
-		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		List<WebElement> elementos = PO_View.checkElement(driver, "class", "all");
-		elementos.get(0).click();
-
-		// Pinchamos en la opcioÌ�n de lista de usuarios.
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'offer/list')]");
-		elementos.get(0).click();
-		WebElement tituloe = driver.findElement(By.name("searchText"));
-		tituloe.click();
-		tituloe.clear();
-		tituloe.sendKeys("OPEL24");
-		// Pulsamos boton buscar
-		By boton = By.className("busqueda");
-		driver.findElement(boton).click();
-
-		List<WebElement> elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody", PO_View.getTimeout());
-
-		boton = By.className("details");
-		driver.findElement(boton).click();
-
-		tituloe = driver.findElement(By.name("content"));
-		tituloe.click();
-		tituloe.clear();
-		tituloe.sendKeys("Me interesa");
-		boton = By.className("enviachat");
-		driver.findElement(boton).click();
-		// Comprobamos mensaje
-		PO_View.checkElement(driver, "text", "Me interesa");
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
-
-		// Vamos al formulario de logueo.
-		PO_HomeView.clickOption(driver, "/identificarse", "class", "signup");
-		// Rellenamos el formulario con admin
-		PO_LoginView.fillForm(driver, "prueba@prueba.com", "123456");
-		// Click en usuarios
-
-		elementos = PO_View.checkElement(driver, "class", "messages");
-		elementos.get(0).click();
-
-		elementos1 = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
-				PO_View.getTimeout());
-		//Solo hay un chat
-		assertEquals(1, elementos1.size());
-		// Salimos de sesion
-		PO_PrivateView.clickOption(driver, "/desconectarse", "class", "btn btn-primary");
+		//TODO
 
 	}
 	
