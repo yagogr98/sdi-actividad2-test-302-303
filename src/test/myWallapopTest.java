@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,13 +37,12 @@ public class myWallapopTest {
 	//static String Geckdriver022 = "C:\\path\\geckodriver024win64.exe";
 	// En MACOSX (Debe ser la versioÌ�n 65.0.1 y desactivar las actualizacioens
 	// automaÌ�ticas):
-		static String PathFirefox65 = "/Applications/Firefox.app/Contents/MacOS/firefox-bin";
-		static String Geckdriver024 = "/Users/yagogarciarodriguez/Downloads/a/geckodriver024mac";
+		static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+		static String Geckdriver024 = "C:\\Users\\Daniel\\Downloads\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
 	// ComuÌ�n a Windows y a MACOSX
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URLlocal = "http://localhost:8081";
-	static String URLremota = "http://ec2-34-224-173-6.compute-1.amazonaws.com:8080";
-	static String URL = URLlocal; // Se va a probar con la URL remota, sino URL=URLlocal
+	static String URL = URLlocal;
 
 	public static WebDriver getDriver(String PathFirefox, String Geckdriver) {
 
@@ -876,7 +876,6 @@ public class myWallapopTest {
 //
 //	}
 
-	//TODO
 	//PRUEBAS Parte 2B – Cliente REST – Aplicación web con JQuery
 	
 //	[Prueba29] Inicio de sesión con datos válidos.
@@ -1003,7 +1002,11 @@ public class myWallapopTest {
 			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button");
 			elementos.get(0).click();
 			
-			
+			try {
+				TimeUnit.SECONDS.sleep(5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararo", PO_View.getTimeout());
 			
@@ -1037,7 +1040,11 @@ public class myWallapopTest {
 			elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button");
 			elementos.get(0).click();
 			
-			
+			try {
+				TimeUnit.SECONDS.sleep(5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararo", PO_View.getTimeout());
 			SeleniumUtils.EsperaCargaPagina(driver, "text", "mensajepruebararosegundo", PO_View.getTimeout());
@@ -1049,9 +1056,8 @@ public class myWallapopTest {
 	// [Prueba35] Mostrar el listado de conversaciones ya abiertas. Comprobar que el
 	// listado contiene las
 	// conversaciones que deben ser.
-	@Test
+	/*@Test
 	public void PR35() {
-		//TODO
 		driver.navigate().to("http://localhost:8081/cliente.html");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
@@ -1072,16 +1078,32 @@ public class myWallapopTest {
 		
 		SeleniumUtils.EsperaCargaPagina(driver, "text", "ofertaquenosale", PO_View.getTimeout());
 
-
-	}
+	}*/
 
 	// [Prueba36] Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
 	// Eliminar de la primera y
 	// comprobar que el listado se actualiza correctamente.
 	@Test
 	public void PR36() {
-		//TODO
-
+		driver.navigate().to("http://localhost:8081/cliente.html");
+		
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//*[@id=\"email\"]");
+		elementos.get(0).click();
+		elementos.get(0).clear();
+		elementos.get(0).sendKeys("prueba@prueba.com");
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"password\"]");
+		elementos.get(0).click();
+		elementos.get(0).clear();
+		elementos.get(0).sendKeys("prueba");
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-login\"]");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/table/tbody/tr[1]/td[5]/a");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-eliminar\"]");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/table/tbody/tr[1]/td[5]/a");
+		elementos.get(0).click();
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "mensajepruebararo", PO_View.getTimeout());
 	}
 
 	// [Prueba37] Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
