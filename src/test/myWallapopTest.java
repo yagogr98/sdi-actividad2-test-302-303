@@ -37,8 +37,12 @@ public class myWallapopTest {
 	//static String Geckdriver022 = "C:\\path\\geckodriver024win64.exe";
 	// En MACOSX (Debe ser la versioÌ�n 65.0.1 y desactivar las actualizacioens
 	// automaÌ�ticas):
+	static String PathFirefox65 = "/Applications/Firefox.app/Contents/MacOS/firefox-bin";
+		static String Geckdriver024 = "/Users/yagogarciarodriguez/Downloads/a/geckodriver024mac";
+		/*
 		static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 		static String Geckdriver024 = "C:\\Users\\Daniel\\Downloads\\PL-SDI-Sesión5-material\\geckodriver024win64.exe";
+	*/
 	// ComuÌ�n a Windows y a MACOSX
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URLlocal = "http://localhost:8081";
@@ -1101,19 +1105,23 @@ public class myWallapopTest {
 		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free", "//*[@id=\"boton-eliminar\"]");
 		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button[1]");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/button[1]");
+		elementos.get(0).click();
 		elementos = PO_View.checkElement(driver, "free", "/html/body/div[1]/div/table/tbody/tr[1]/td[5]/a");
 		elementos.get(0).click();
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "mensajepruebararo", PO_View.getTimeout());
 	}
 
-	// [Prueba37] Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
-	// Eliminar de la Ãºltima y
-	// comprobar que el listado se actualiza correctamente.
-	@Test
-	public void PR37() {
-		//TODO
-
-	}
+//	// [Prueba37] Sobre el listado de conversaciones ya abiertas. Pinchar el enlace
+//	// Eliminar de la Ãºltima y
+//	// comprobar que el listado se actualiza correctamente.
+//	@Test
+//	public void PR37() {
+//		//TODO
+//
+//	}
 	
 	//TODO
 		//OPCIONALES CONVERSACION
